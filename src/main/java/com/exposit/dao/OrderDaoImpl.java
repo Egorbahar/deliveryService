@@ -14,7 +14,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
-    private final static String FILE_PATH = "src/main/resources/Order.json";
+    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Order.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().setExclusionStrategies(new OrderDaoImpl.ExclusionForOrder()).create();
 
     @Override
@@ -38,7 +38,8 @@ public class OrderDaoImpl implements OrderDao {
         List<Order> orders;
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(FILE_PATH));
+            String absolutePath = new File("").getAbsolutePath();
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -65,7 +66,8 @@ public class OrderDaoImpl implements OrderDao {
     }
 
     public void writeFile(List<Order> list) {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+        String absolutePath = new File("").getAbsolutePath();
+        try (FileWriter writer = new FileWriter(absolutePath + FILE_PATH)) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();

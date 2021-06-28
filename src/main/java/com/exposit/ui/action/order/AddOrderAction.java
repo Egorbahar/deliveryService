@@ -21,11 +21,14 @@ public class AddOrderAction extends AbstractOrderAction {
                       .filter(product -> product.getStore().getId().equals(storeId))
                       .forEach(System.out::println);
         System.out.println("Enter the product id:");
+        scanner = new Scanner(System.in);
         Long productId = scanner.nextLong();
         System.out.println("Enter the quantity of product:");
+        scanner = new Scanner(System.in);
         Integer quantityProd = scanner.nextInt();
         customerService.getAll().forEach(System.out::println);
         System.out.println("Enter the  customer id:");
+        scanner = new Scanner(System.in);
         Long customerId = scanner.nextLong();
         Customer customer = customerService.getById(customerId);
         Product product = productService.getById(productId);
@@ -37,6 +40,7 @@ public class AddOrderAction extends AbstractOrderAction {
         store.getProducts().set(index, product);
         storeService.updateStore(store);
         System.out.println("Enter the delivery date(dd-MM-yyyy):");
+        scanner = new Scanner(System.in);
         LocalDate localDate = LocalDate.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         orderService.addOrder(new Order(product.getName(), quantityProd, customer, store, localDate));
     }

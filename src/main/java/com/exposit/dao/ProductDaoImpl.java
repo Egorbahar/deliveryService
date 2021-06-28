@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
-    private final static String FILE_PATH = "src/main/resources/Products.json";
+    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Products.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().setExclusionStrategies(new ExclusionForProduct()).create();
 
     public Product save(Product product) {
@@ -40,7 +40,8 @@ public class ProductDaoImpl implements ProductDao {
         List<Product> products = new ArrayList<>();
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(FILE_PATH));
+            String absolutePath = new File("").getAbsolutePath();
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -88,7 +89,8 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     public void writeFile(List<Product> list) {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+        String absolutePath = new File("").getAbsolutePath();
+        try (FileWriter writer = new FileWriter(absolutePath + FILE_PATH)) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();

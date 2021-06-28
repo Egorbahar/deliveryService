@@ -12,6 +12,7 @@ public class RegisterCustomerAction extends AbstractCustomerAction {
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         System.out.println("Enter the email of customer:");
+        scanner = new Scanner(System.in);
         String email = scanner.nextLine();
         customerService.add(new Customer(name, email));
     }

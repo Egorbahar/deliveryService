@@ -26,16 +26,20 @@ public class AddProductAction extends AbstractProductAction {
         Scanner scanner = new Scanner(System.in);
         Long storeId = scanner.nextLong();
         System.out.println("Enter the name of product:");
+        scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         System.out.println("Enter the price of product:");
+        scanner = new Scanner(System.in);
         Double price = scanner.nextDouble();
         System.out.println("Enter the quantity of product:");
+        scanner = new Scanner(System.in);
         Integer quantity = scanner.nextInt();
         Store store = storeService.getById(storeId);
         System.out.println("Available categories:\n" + CategoryItem.printAll());
         System.out.println("Enter the categories of product:");
         List<Category> categories = new ArrayList<>();
         String buffer;
+        scanner = new Scanner(System.in);
         try {
             buffer = scanner.nextLine();
 

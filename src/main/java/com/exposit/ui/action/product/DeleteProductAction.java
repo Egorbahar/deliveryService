@@ -15,6 +15,7 @@ public class DeleteProductAction extends AbstractProductAction {
         Long storeId = scanner.nextLong();
         productService.getAllByStoreId(storeId).forEach(System.out::println);
         System.out.println("Enter the  product id:");
+        scanner = new Scanner(System.in);
         Long productId = scanner.nextLong();
         Store store = storeService.getAll().stream()
                                   .filter(s -> s.getId().equals(storeId))

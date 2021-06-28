@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
-    private final static String FILE_PATH = "src/main/resources/Customers.json";
+    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Customers.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public void save(Customer customer) {
@@ -31,7 +31,8 @@ public class CustomerDaoImpl implements CustomerDao {
     public List<Customer> getAll() {
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(FILE_PATH));
+            String absolutePath = new File("").getAbsolutePath();
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -60,7 +61,8 @@ public class CustomerDaoImpl implements CustomerDao {
     }
 
     public void writeFile(List<Customer> list) {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+        String absolutePath = new File("").getAbsolutePath();
+        try (FileWriter writer = new FileWriter(absolutePath + FILE_PATH)) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();

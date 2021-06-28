@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class StoreDaoImpl implements StoreDao {
-    private final static String FILE_PATH = "src/main/resources/Stores.json";
+    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Stores.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public void save(Store store) {
@@ -32,7 +32,8 @@ public class StoreDaoImpl implements StoreDao {
         List<Store> stores;
         BufferedReader bufferedReader = null;
         try {
-            bufferedReader = new BufferedReader(new FileReader(FILE_PATH));
+            String absolutePath = new File("").getAbsolutePath();
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }

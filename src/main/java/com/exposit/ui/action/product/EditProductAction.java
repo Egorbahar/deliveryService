@@ -15,12 +15,16 @@ public class EditProductAction extends AbstractProductAction {
         Long storeId = scanner.nextLong();
         storeService.getById(storeId).getProducts().forEach(System.out::println);
         System.out.println("Enter the product id:");
+        scanner = new Scanner(System.in);
         Long productId = scanner.nextLong();
         System.out.println("Enter the new name of product:");
+        scanner = new Scanner(System.in);
         String nameNew = scanner.nextLine();
         System.out.println("Enter the new quantity of product:");
+        scanner = new Scanner(System.in);
         Integer quantityNew = scanner.nextInt();
         System.out.println("Enter the new price of product:");
+        scanner = new Scanner(System.in);
         Double priceNew = scanner.nextDouble();
         Store store = storeService.getAll().stream()
                                   .filter(s -> s.getId().equals(storeId))

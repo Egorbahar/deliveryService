@@ -13,8 +13,10 @@ public class EditStoreAction extends AbstractStoreAction {
         Scanner scanner = new Scanner(System.in);
         Long storeId = scanner.nextLong();
         System.out.println("Enter the new name of store:");
+        scanner = new Scanner(System.in);
         String nameNew = scanner.nextLine();
         System.out.println("Enter the new address of store:");
+        scanner = new Scanner(System.in);
         String addressNew = scanner.nextLine();
         Store store = storeService.getById(storeId);
         store.setName(nameNew);

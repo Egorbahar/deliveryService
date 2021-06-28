@@ -13,8 +13,10 @@ public class EditCustomerAction extends AbstractCustomerAction {
         Scanner scanner = new Scanner(System.in);
         Long customerId = scanner.nextLong();
         System.out.println("Enter the new name of customer:");
+        scanner = new Scanner(System.in);
         String nameNew = scanner.nextLine();
         System.out.println("Enter the new email of customer:");
+        scanner = new Scanner(System.in);
         String emailNew = scanner.nextLine();
         Customer customer = customerDao.getById(customerId);
         customer.setName(nameNew);
