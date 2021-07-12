@@ -2,6 +2,7 @@ package com.exposit.dao;
 
 import com.exposit.api.dao.StoreDao;
 import com.exposit.model.Store;
+import com.exposit.util.PropertyReader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -11,7 +12,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class StoreDaoImpl implements StoreDao {
-    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Stores.json";
+
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public void save(Store store) {
@@ -33,7 +34,7 @@ public class StoreDaoImpl implements StoreDao {
         BufferedReader bufferedReader = null;
         try {
             String absolutePath = new File("").getAbsolutePath();
-            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue("STORE_FILE")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -62,7 +63,8 @@ public class StoreDaoImpl implements StoreDao {
     }
 
     public void writeFile(List<Store> list) {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+        String absolutePath = new File("").getAbsolutePath();
+        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue("STORE_FILE"))) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();

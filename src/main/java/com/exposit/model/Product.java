@@ -1,13 +1,10 @@
 package com.exposit.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
-import java.util.Objects;
 
-@Getter
-@Setter
+@Data
 public class Product {
     private Long id;
     private String name;
@@ -32,33 +29,4 @@ public class Product {
         return String.valueOf(price);
     }
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Product product = (Product) object;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(name, product.name) &&
-                Objects.equals(quantity, product.quantity) &&
-                Objects.equals(store, product.store) &&
-                Objects.equals(categories, product.categories) &&
-                Objects.equals(price, product.price);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, quantity, store, categories, price);
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", quantity=" + quantity +
-                ", store=" + store.getId() +
-                ", categories=" + categories +
-                ", price=" + price +
-                '}';
-    }
 }

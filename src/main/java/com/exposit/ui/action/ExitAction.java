@@ -1,6 +1,6 @@
 package com.exposit.ui.action;
 
-public class Exit implements Action {
+public class ExitAction implements Action {
     @Override
     public void execute() {
         System.out.println("Good Bye!!");
