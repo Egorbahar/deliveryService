@@ -1,7 +1,7 @@
-package com.exposit.ui;
+package com.exposit.ui.menu;
 
-import com.exposit.ui.action.Back;
-import com.exposit.ui.action.Exit;
+import com.exposit.ui.action.BackAction;
+import com.exposit.ui.action.ExitAction;
 import com.exposit.ui.action.customer.DeleteCustomerAction;
 import com.exposit.ui.action.customer.EditCustomerAction;
 import com.exposit.ui.action.customer.NextCustomerMenuAction;
@@ -33,7 +33,7 @@ public class Builder {
         rootMenu.addItem(new MenuItem("1.Stores and Products", new NextStoreMenuAction(), Navigator.getInstance().getCurrentMenu()));
         rootMenu.addItem(new MenuItem("2.Orders", new NextOrderMenuAction(), Navigator.getInstance().getCurrentMenu()));
         rootMenu.addItem(new MenuItem("3.Customers", new NextCustomerMenuAction(), Navigator.getInstance().getCurrentMenu()));
-        rootMenu.addItem(new MenuItem("4.Exit", new Exit()));
+        rootMenu.addItem(new MenuItem("4.Exit", new ExitAction()));
 
     }
 
@@ -57,19 +57,19 @@ public class Builder {
                 menu.addItem(new MenuItem("8.Sorting products by price", new SortProductByPriceAction()));
                 menu.addItem(new MenuItem("9.Search for products by attributes", new FindByAttributesAction()));
                 menu.addItem(new MenuItem("10.Search for products by category", new FindByCategoryAction()));
-                menu.addItem(new MenuItem("11.Back", new Back()));
+                menu.addItem(new MenuItem("11.Back", new BackAction()));
                 break;
             case ORDERS:
                 menu.addItem(new MenuItem("1.Add order", new AddOrderAction()));
                 menu.addItem(new MenuItem("2.Show all orders", new ShowAllOrdersAction()));
-                menu.addItem(new MenuItem("3.Back", new Back()));
+                menu.addItem(new MenuItem("3.Back", new BackAction()));
                 break;
 
             case CUSTOMERS:
                 menu.addItem(new MenuItem("1.Register customer", new RegisterCustomerAction()));
                 menu.addItem(new MenuItem("2.Delete customer", new DeleteCustomerAction()));
                 menu.addItem(new MenuItem("3.Edit the customer information", new EditCustomerAction()));
-                menu.addItem(new MenuItem("4.Back", new Back()));//
+                menu.addItem(new MenuItem("4.Back", new BackAction()));//
                 break;
         }
         return menu;

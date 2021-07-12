@@ -3,6 +3,7 @@ package com.exposit.dao;
 import com.exposit.api.dao.OrderDao;
 import com.exposit.model.Order;
 import com.exposit.model.Store;
+import com.exposit.util.PropertyReader;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -14,7 +15,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class OrderDaoImpl implements OrderDao {
-    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Order.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().setExclusionStrategies(new OrderDaoImpl.ExclusionForOrder()).create();
 
     @Override
@@ -30,7 +30,7 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public Order getById(Long id) {
         return getAll().stream()
-                       .filter(order -> order.getId().equals(id)).findFirst().orElse(null);//написать exp
+                       .filter(order -> order.getId().equals(id)).findFirst().orElse(null);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class OrderDaoImpl implements OrderDao {
         BufferedReader bufferedReader = null;
         try {
             String absolutePath = new File("").getAbsolutePath();
-            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue("ORDER_FILE")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -67,7 +67,7 @@ public class OrderDaoImpl implements OrderDao {
 
     public void writeFile(List<Order> list) {
         String absolutePath = new File("").getAbsolutePath();
-        try (FileWriter writer = new FileWriter(absolutePath + FILE_PATH)) {
+        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue("ORDER_FILE"))) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();

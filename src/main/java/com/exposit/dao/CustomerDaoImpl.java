@@ -2,6 +2,7 @@ package com.exposit.dao;
 
 import com.exposit.api.dao.CustomerDao;
 import com.exposit.model.Customer;
+import com.exposit.util.PropertyReader;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
@@ -11,7 +12,6 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao {
-    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Customers.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public void save(Customer customer) {
@@ -32,7 +32,7 @@ public class CustomerDaoImpl implements CustomerDao {
         BufferedReader bufferedReader = null;
         try {
             String absolutePath = new File("").getAbsolutePath();
-            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue("CUSTOMER_FILE")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -62,7 +62,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     public void writeFile(List<Customer> list) {
         String absolutePath = new File("").getAbsolutePath();
-        try (FileWriter writer = new FileWriter(absolutePath + FILE_PATH)) {
+        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue("CUSTOMER_FILE"))) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();

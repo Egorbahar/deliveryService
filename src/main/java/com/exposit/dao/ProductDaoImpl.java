@@ -3,6 +3,7 @@ package com.exposit.dao;
 import com.exposit.api.dao.ProductDao;
 import com.exposit.model.Product;
 import com.exposit.model.Store;
+import com.exposit.util.PropertyReader;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDaoImpl implements ProductDao {
-    private final static String FILE_PATH = "/src/main/java/com/exposit/dao/json/Products.json";
     private final Gson gson = new GsonBuilder().setPrettyPrinting().setExclusionStrategies(new ExclusionForProduct()).create();
 
     public Product save(Product product) {
@@ -41,7 +41,7 @@ public class ProductDaoImpl implements ProductDao {
         BufferedReader bufferedReader = null;
         try {
             String absolutePath = new File("").getAbsolutePath();
-            bufferedReader = new BufferedReader(new FileReader(absolutePath + FILE_PATH));
+            bufferedReader = new BufferedReader(new FileReader(absolutePath + new PropertyReader().getPropertyValue("PRODUCT_FILE")));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -90,7 +90,7 @@ public class ProductDaoImpl implements ProductDao {
 
     public void writeFile(List<Product> list) {
         String absolutePath = new File("").getAbsolutePath();
-        try (FileWriter writer = new FileWriter(absolutePath + FILE_PATH)) {
+        try (FileWriter writer = new FileWriter(absolutePath + new PropertyReader().getPropertyValue("PRODUCT_FILE"))) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,7 +100,7 @@ public class ProductDaoImpl implements ProductDao {
     static class ExclusionForProduct implements ExclusionStrategy {
         @Override
         public boolean shouldSkipField(FieldAttributes fieldAttributes) {
-            return  (fieldAttributes.getDeclaringClass() == Store.class && fieldAttributes.getName().equals("address"))
+            return (fieldAttributes.getDeclaringClass() == Store.class && fieldAttributes.getName().equals("address"))
                     || (fieldAttributes.getDeclaringClass() == Store.class && fieldAttributes.getName().equals("products"));
         }
 
