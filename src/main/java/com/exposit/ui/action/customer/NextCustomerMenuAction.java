@@ -1,7 +1,7 @@
 package com.exposit.ui.action.customer;
 
-import com.exposit.ui.Builder;
-import com.exposit.ui.Navigator;
+import com.exposit.ui.menu.Builder;
+import com.exposit.ui.menu.Navigator;
 
 public class NextCustomerMenuAction extends AbstractCustomerAction {
     @Override

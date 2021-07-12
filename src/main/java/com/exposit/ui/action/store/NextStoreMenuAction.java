@@ -1,7 +1,7 @@
 package com.exposit.ui.action.store;
 
-import com.exposit.ui.Builder;
-import com.exposit.ui.Navigator;
+import com.exposit.ui.menu.Builder;
+import com.exposit.ui.menu.Navigator;
 
 public class NextStoreMenuAction extends AbstractStoreAction {
     @Override
